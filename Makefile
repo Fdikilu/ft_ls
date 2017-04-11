@@ -23,7 +23,7 @@ GFLAGS = -Wall -Wextra -Werror
 SRC =\
 	ft_content_swap.c \
 	ft_sort.c \
-	read_dir.c \
+	ft_readdir.c \
 	test.c
 
 OBJ = $(SRC:.c=.o)
