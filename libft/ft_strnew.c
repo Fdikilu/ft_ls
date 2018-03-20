@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/23 20:11:28 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/19 18:06:59 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strnew(size_t size)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	char	*str;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
-	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
-	}
-	return (0);
+	str = NULL;
+	if (!(str = (char *)malloc(sizeof(*str) * (size + 1))))
+		return (NULL);
+	ft_bzero((void *)str, size + 1);
+	return (str);
 }

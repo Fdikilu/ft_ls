@@ -24,7 +24,8 @@ SRC =\
 	ft_content_swap.c \
 	ft_sort.c \
 	ft_readdir.c \
-	test.c
+	ft_parse.c \
+	main.c
 
 OBJ = $(SRC:.c=.o)
 

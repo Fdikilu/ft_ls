@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/08/06 19:48:06 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/01 16:37:56 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_putstr(char *str)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int cpt;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	if (str)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		cpt = 0;
+		while (str[cpt] != '\0')
+		{
+			ft_putchar(str[cpt]);
+			cpt = cpt + 1;
+		}
 	}
-	return (0);
 }

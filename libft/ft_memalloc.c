@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/23 20:10:49 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/01 14:36:02 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ft_memalloc(size_t size)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int	i;
+	int	*zone;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	i = 0;
+	zone = NULL;
+	zone = malloc(sizeof(*zone) * size);
+	if (zone == NULL)
+		return (NULL);
+	while (i < (int)size)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		zone[i] = 0;
+		i++;
 	}
-	return (0);
+	return (zone);
 }

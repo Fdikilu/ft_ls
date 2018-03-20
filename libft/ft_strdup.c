@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/08/16 14:43:39 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/01 15:40:22 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strdup(char *src)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int		i;
+	int		srclen;
+	char	*str;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	srclen = ft_strlen(src);
+	str = (char *)malloc(sizeof(*str) * (srclen + 1));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i])
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		str[i] = src[i];
+		i = i + 1;
 	}
-	return (0);
+	str[i] = '\0';
+	return (str);
 }

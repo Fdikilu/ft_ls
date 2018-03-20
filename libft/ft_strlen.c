@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/08/06 19:57:55 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/08/06 20:14:05 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-
-int		main(int ac, char **av)
+int		ft_strlen(char *str)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int cpt;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	cpt = 0;
+	while (str[cpt] != '\0')
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		cpt = cpt + 1;
 	}
-	return (0);
+	return (cpt);
 }

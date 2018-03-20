@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/23 23:51:11 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/14 18:35:10 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
-
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	if (n == 0)
+		return (1);
+	if (s1 && s2)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		while (--n && *s1 && *s2)
+		{
+			if (*s1 == *s2)
+			{
+				s1++;
+				s2++;
+			}
+			else
+				return (0);
+		}
+		if (*s1 == *s2)
+			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }

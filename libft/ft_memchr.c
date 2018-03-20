@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/23 22:51:34 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/14 17:30:40 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	unsigned char	*str;
+	unsigned char	c2;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	c2 = (unsigned char)c;
+	str = (unsigned char *)s;
+	while (n--)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		if (*str == c2)
+			return (str);
+		str++;
 	}
-	return (0);
+	return (NULL);
 }

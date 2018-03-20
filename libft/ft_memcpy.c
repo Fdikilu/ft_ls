@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/23 22:15:06 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/12 19:17:24 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int				i;
+	unsigned char	*source;
+	unsigned char	*destination;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	i = 0;
+	source = (unsigned char *)src;
+	destination = dest;
+	while (i < (int)n)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		destination[i] = source[i];
+		i++;
 	}
-	return (0);
+	return (dest);
 }

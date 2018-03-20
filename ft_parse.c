@@ -6,54 +6,80 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/16 05:23:00 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/03/20 05:51:23 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	ft_parse(char *str, unsigned char *flags)
-{
-	int				i;
-
-	i = 1;
-	while (str[i])
+static void flags_on(unsigned char *tmp, int c)
+{	
+	if (c == 'l')
+		*tmp |= FLAG_L;
+	else if (c == 'R')
+		*tmp |= FLAG_UPR;
+	else if (c == 'a')
+		*tmp |= FLAG_A;
+	else if (c == 'r')
+		*tmp |= FLAG_R;
+	else if (c == 't')
+		*tmp |= FLAG_T;
+	else if (c == '-' && (*tmp == NO_FLAG))
+		return ;
+	else
 	{
-		if (str[i] == 'l')
-			*flags |= FLAG_L;
-		else if (str[i] == 'R')
-			*flags |= FLAG_UPR;
-		else if (str[i] == 'a')
-			*flags |= FLAG_A;
-		else if (str[i] == 'r')
-			*flags |= FLAG_R;
-		else if (str[i] == 't')
-			*flags |= FLAG_T;
-		else
-		{
-			*flags |= FLAG_ERR;
-			return ;
-		}
-		i++;
+		*tmp |= FLAG_ERR;
+		*tmp &= FLAG_ERR;
+		return ;
 	}
 }
 
-void	ft_ls(char **av, unsigned char *flags)
+static void	init_flags(char *s, unsigned char *flags)
 {
-	int		i;
+	unsigned char	tmp;
 
-	i = 1;
-	while (av[i])
+	++s;
+	if (*s == '\0')
 	{
-		if (*flags & FLAG_ERR)
-		{
-			printf("usage: [-lRart] [file ...]");
-			return ;
-		}
-		else if (av[i][0] == '-')
-			ft_parse(av[i], flags);
-		else
-			ft_dols(av[i], flags);
-		i++;
+		*flags |= FLAG_ERR;
+		return ;
 	}
+	tmp = NO_FLAG;
+	while (*s)
+	{
+		flags_on(&tmp, *s);
+		++s;
+	}
+	*flags |= tmp;
+}
+/*
+static t_list	*parse_f(char *s)
+{
+	t_list	*l_dir;
+
+	return (l_dir);
+}*/
+
+t_list	*ft_parse(char **av, unsigned char *flags)
+{
+	t_list	*l_dir;
+
+	++av;
+	l_dir = NULL;
+	while (*av)
+	{
+		if (*flags & FLAG_ERR || (**av == '-' && ft_strlen(*av) == 1))
+		{
+			printf("usage: [-lRart] [file ...]\n");
+			return (NULL);
+		}
+		else if (**av == '-')
+			init_flags(*av, flags);
+		else
+		{
+		//	parse_f();
+		}
+		++av;
+	}
+	return (l_dir);
 }

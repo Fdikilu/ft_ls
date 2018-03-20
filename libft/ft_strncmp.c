@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/08/10 15:49:37 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/14 19:18:24 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int		ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
-
-	(void)av;
-	if (ac < 1)
+	if (n <= 0)
 		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	n--;
+	while (n-- && *s1 == *s2 && *s1 && *s2)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		s1++;
+		s2++;
 	}
-	return (0);
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

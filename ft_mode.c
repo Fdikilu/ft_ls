@@ -25,7 +25,7 @@ char		*ft_mode(struct stat stat_m)
 {
 	char	*rights;
 
-	rights = ft_strnew(11);
+	rights = ft_strnew(10);
 	rights[0] = ft_type(stat_m);
 	rights[1] = (stat_m.st_mode & S_IRUSR) ? 'r': '-';
 	rights[2] = (stat_m.st_mode & S_IWUSR) ? 'w': '-';

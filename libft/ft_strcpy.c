@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/08/10 00:36:54 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/08 19:52:44 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-
-int		main(int ac, char **av)
+char	*ft_strcpy(char *dest, char *src)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int i;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	i = 0;
+	while (src[i])
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		dest[i] = src[i];
+		i++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

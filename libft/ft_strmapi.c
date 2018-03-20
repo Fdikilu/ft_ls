@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/23 23:50:34 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/02 18:41:39 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	int		i;
+	char	*str;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	str = NULL;
+	if ((str = (char *)malloc(sizeof(*str) * (ft_strlen((char *)s) + 1))))
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		while (s[i])
+		{
+			str[i] = f(i, s[i]);
+			i++;
+		}
+		str[i] = '\0';
 	}
-	return (0);
+	return (str);
 }

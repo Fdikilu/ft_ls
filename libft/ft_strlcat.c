@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:32:06 by fdikilu          ###   ########.fr       */
+/*   Created: 2016/11/20 12:43:21 by fdikilu           #+#    #+#             */
+/*   Updated: 2016/12/17 19:15:41 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	t_list			*l_dir;
-	unsigned char	flags;
+	size_t	i;
+	size_t	destlen;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
-		printf("liste non creer\n");
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	if (l_dir)
+	destlen = (size_t)ft_strlen(dest);
+	i = 0;
+	while (src[i] && destlen + i < size - 1 && size > 0)
 	{
-		printf("%s\n", (char *)l_dir->content);
-		l_dir = l_dir->next;
+		dest[destlen + i] = src[i];
+		i++;
 	}
-	return (0);
+	dest[destlen + i] = '\0';
+	if (size < destlen + i)
+		return (size + ft_strlen((char *)src));
+	return (destlen + ft_strlen((char *)src));
 }

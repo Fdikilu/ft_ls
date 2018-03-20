@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/16 10:04:16 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/03/19 21:27:29 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define FLAGS "lRart"
 
 # define NO_FLAG 0
-# define FLAG_l 1
+# define FLAG_L 1
 # define FLAG_R 2
 # define FLAG_A 4
 # define FLAG_UPR 8
@@ -52,8 +52,8 @@ typedef struct		s_bt
 	size_t			data_size;
 }					t_bt;
 
-void				ft_ls(unsigned char flags);
-t_list				*ft_readdir(char *name);
+t_list				*ft_parse(char **av, unsigned char *flags);
+t_list				*ft_readdir(char *name, t_list *l_dir);
 void				ft_content_swap(t_list *l1, t_list *l2);
 void				ft_ascii_sort(t_list *l_dir);
 
