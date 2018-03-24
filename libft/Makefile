@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 01:03:23 by fdikilu           #+#    #+#              #
-#    Updated: 2016/12/17 20:55:20 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/03/24 02:17:37 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC =	ft_atoi.c \
 		ft_isprint.c \
 		ft_itoa.c \
 		ft_lstadd.c \
+		ft_lstaddend.c \
 		ft_lstdel.c \
 		ft_lstdelone.c \
 		ft_lstiter.c \

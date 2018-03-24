@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/24 09:37:42 by fdikilu          ###   ########.fr       */
+/*   Created: 2018/03/24 00:57:08 by fdikilu           #+#    #+#             */
+/*   Updated: 2018/03/24 02:17:08 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_lstaddend(t_list **alst, t_list *new)
 {
-	t_ldir			*l_dir;
-	unsigned char	flags;
+	t_list	*tmp;
 
-	(void)av;
-	if (ac < 1)
-		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
+	if (!new || !(*alst))
+		return ;
+	else
 	{
-		printf("\t\t\tListe non creer\n");
-		return (0);
+		tmp = *alst;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	ft_putstr("flags :");
-	ft_putnbr((int)flags);
-	ft_putchar('\n');
-	while (l_dir)
-	{
-		printf("%s\n", l_dir->name);
-		l_dir = l_dir->next;
-	}
-	return (0);
 }

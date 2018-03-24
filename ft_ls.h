@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/19 21:27:29 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/03/24 09:03:01 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ typedef struct		s_info
 	struct dirent	dir;
 }					t_info;
 
-typedef struct		s_bt
+typedef struct		s_ldir
 {
-	struct s_bt		*parent;
-	struct s_bt		*left;
-	struct s_bt		*right;
-	void			*data;
-	size_t			data_size;
-}					t_bt;
+	char			*name;
+	DIR				*f_dir;
+	struct s_ldir	*next;
+}					t_ldir;
 
-t_list				*ft_parse(char **av, unsigned char *flags);
+t_ldir				*ft_parse(char **av, unsigned char *flags);
 t_list				*ft_readdir(char *name, t_list *l_dir);
 void				ft_content_swap(t_list *l1, t_list *l2);
 void				ft_ascii_sort(t_list *l_dir);

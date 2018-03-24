@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/20 05:51:23 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/03/24 09:36:12 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,39 @@ static void	init_flags(char *s, unsigned char *flags)
 	}
 	*flags |= tmp;
 }
-/*
-static t_list	*parse_f(char *s)
-{
-	t_list	*l_dir;
 
-	return (l_dir);
-}*/
-
-t_list	*ft_parse(char **av, unsigned char *flags)
+static t_ldir	*parse(char *s, DIR *fdir, t_ldir **l_dir)
 {
-	t_list	*l_dir;
+	t_ldir	*new;
+	t_ldir	*tmp;
+
+	if (!(*l_dir))
+	{
+		if (!(*l_dir = (t_ldir *)malloc(sizeof(**l_dir))))
+			return (NULL);
+		(*l_dir)->name = s;
+		(*l_dir)->f_dir = fdir;
+		(*l_dir)->next = NULL;
+	}
+	else
+	{
+		tmp = *l_dir;
+		while (tmp->next)
+			tmp = tmp->next;
+		if (!(new = (t_ldir *)malloc(sizeof(*new))))
+			return (NULL);
+		new->name = s;
+		new->f_dir = fdir;
+		new->next = NULL;
+		tmp->next = new;
+	}
+	return (*l_dir);
+}
+
+t_ldir	*ft_parse(char **av, unsigned char *flags)
+{
+	DIR		*fdir;
+	t_ldir	*l_dir;
 
 	++av;
 	l_dir = NULL;
@@ -75,9 +97,23 @@ t_list	*ft_parse(char **av, unsigned char *flags)
 		}
 		else if (**av == '-')
 			init_flags(*av, flags);
+		else if ((fdir = opendir(*av)))
+		{
+			if (!(l_dir = parse(*av, fdir, &l_dir)))
+			{
+				if ((closedir(fdir) == -1))
+					perror("closedir");
+				return (NULL);
+			}
+			if ((closedir(fdir) == -1))
+			{
+				perror("closedir");
+				return (NULL);	
+			}
+		}
 		else
 		{
-		//	parse_f();
+			printf("not a directory\n");
 		}
 		++av;
 	}
