@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_grp.c                                           :+:      :+:    :+:   */
+/*   ft_timecmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/28 05:01:22 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/28 05:01:26 by fdikilu          ###   ########.fr       */
+/*   Created: 2018/03/28 11:12:27 by fdikilu           #+#    #+#             */
+/*   Updated: 2018/03/28 11:16:24 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-struct group	*ft_grp(struct stat stat_grp)
+int		ft_timecmp(struct stat st1, struct stat st2)
 {
-	struct group	*st_grp;
-
-	st_grp = NULL;
-	if (!(st_grp = getgrgid(stat_grp.st_gid)))
-		perror("getgrgid");
-	return (st_grp);
+	return (st1.st_mtime - st2.st_mtime);
 }

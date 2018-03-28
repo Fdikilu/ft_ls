@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/24 09:03:01 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/03/28 11:41:52 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@
 
 typedef struct		s_info
 {
-	char			right[11];
-	struct stat		s_stat;
-	struct passwd	pwd;
-	struct group	grp;
+	char			*name;
+	struct stat		s_st;
 	char			*time;
-	struct dirent	dir;
+	char			rights[11];
+	struct passwd	*pwd;
+	struct group	*grp;
 }					t_info;
 
 typedef struct		s_ldir
@@ -50,9 +50,20 @@ typedef struct		s_ldir
 	struct s_ldir	*next;
 }					t_ldir;
 
+char				*ft_time(struct stat st_t);
+struct group		*ft_grp(struct stat stat_grp);
+struct passwd		*ft_pwd(struct stat stat_pwd);
+void				ft_mode(struct stat stat_m, char rights[11]);
 t_ldir				*ft_parse(char **av, unsigned char *flags);
-t_list				*ft_readdir(char *name, t_list *l_dir);
+t_list				*ft_readdir(DIR *flux_dir, t_list *l_dir);
 void				ft_content_swap(t_list *l1, t_list *l2);
 void				ft_ascii_sort(t_list *l_dir);
+void				ft_ascii_sortr(t_list *l_dir);
+void				ft_ascii_sort_time(t_list *l_dir);
+void				ft_ascii_sort_timer(t_list *l_dir);
+int					ft_timecmp(struct stat st1, struct stat st2);
+void				ft_isnotdir(char *name, t_list **l_file,
+	unsigned char *flags);
+void				ft_print_file(t_list *l_file, unsigned char *flags);
 
 #endif
