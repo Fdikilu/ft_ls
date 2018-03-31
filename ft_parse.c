@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/28 01:39:18 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:42:42 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static t_ldir	*parse(char *s, DIR *fdir, t_ldir **l_dir)
 	return (*l_dir);
 }
 
-static int		norme(char *av, unsigned char *fl, t_ldir **l_d, DIR **fd)
+static int		norme(char *av, unsigned char *fl, t_ldir **l_d, DIR *fd)
 {
 	if (*fl & FLAG_ERR || (*av == '-' && ft_strlen(av) == 1))
 	{
@@ -90,15 +90,15 @@ static int		norme(char *av, unsigned char *fl, t_ldir **l_d, DIR **fd)
 	}
 	else if (*av == '-')
 		init_flags(av, fl);
-	else if ((*fd = opendir(av)))
+	else if ((fd = opendir(av)))
 	{
-		if (!(*l_d = parse(av, *fd, l_d)))
+		if (!(*l_d = parse(av, fd, l_d)))
 		{
-			if ((closedir(*fd) == -1))
+			if ((closedir(fd) == -1))
 				perror("closedir");
 			return (1);
 		}
-		if ((closedir(*fd) == -1))
+		if ((closedir(fd) == -1))
 		{
 			perror("closedir");
 			return (1);
@@ -116,13 +116,22 @@ t_ldir			*ft_parse(char **av, unsigned char *flags)
 	t_ldir	*l_dir;
 
 	++av;
+	fdir = NULL;
 	l_dir = NULL;
 	l_file = NULL;
 	while (*av)
 	{
-		if (!(norme(*av, flags, &l_dir, &fdir)))
+		if (!(norme(*av, flags, &l_dir, fdir)))
 			ft_isnotdir(*av, &l_file, flags);
 		++av;
+	}
+	if (!l_file && !l_dir)
+	{
+		if (!(fdir = opendir(".")))
+			perror("opendir");
+		l_dir = parse(".", fdir, &l_dir);
+		if ((closedir(fdir) == -1))
+			perror("closedir");
 	}
 	if (l_file)
 		ft_print_file(l_file, flags);
