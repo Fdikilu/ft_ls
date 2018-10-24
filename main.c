@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/31 16:42:48 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/24 22:06:19 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		main(int ac, char **av)
 	t_ldir			*l_dir;
 	unsigned char	flags;
 
+	flags = NO_FLAG;
 	if (ac < 1)
 		return (0);
 	if (!(l_dir = ft_parse(av, &flags)))
@@ -25,7 +26,7 @@ int		main(int ac, char **av)
 	while (l_dir)
 	{
 		if (!(tmp = ft_readdir(l_dir->f_dir)))
-			printf("%s ca marche pas\n", l_dir->name);
+			printf("nom %s\nfd %d\n", l_dir->name, (int)l_dir->f_dir);
 		while (tmp)
 		{
 			printf("%s %s\n", ((t_info *)tmp->content)->rights, ((t_info *)tmp->content)->name);

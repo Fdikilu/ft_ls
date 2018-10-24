@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:57:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/31 16:42:52 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/24 21:42:54 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ t_list	*ft_readdir(DIR *flux_dir)
 	l_indir = NULL;
 	while ((struct_dir = readdir(flux_dir)))
 	{
-		printf("ICI\n");
-		if (!(info = ft_info(struct_dir)))
-			printf("info marche pas\n");
+		info = ft_info(struct_dir);
 		if (l_indir)
 			ft_lstadd(&l_indir, ft_lstnew((t_info *)info, sizeof(*info)));
 		else
