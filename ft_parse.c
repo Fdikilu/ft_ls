@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/24 22:45:57 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/25 21:30:52 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,8 @@ static int		norme(char *av, unsigned char *fl, t_ldir **l_d, DIR *fd)
 	{
 		if (!(*l_d = listdir(av, fd, l_d)))
 		{
-			if ((closedir(fd) == -1)) //  a retirer et trouver un endroit --
+			if (closedir(fd) == -1)
 				perror("closedir");
-			return (1);
-		}
-		if ((closedir(fd) == -1)) // a retirer  -->ou le mettre
-		{
-			perror("closedir");
 			return (1);
 		}
 	}
@@ -109,7 +104,7 @@ static int		norme(char *av, unsigned char *fl, t_ldir **l_d, DIR *fd)
 	return (1);
 }
 
-t_ldir			*ft_parse(char **av, unsigned char *flags)
+t_ldir			*ft_parse(int ac, char **av, unsigned char *flags)
 {
 	DIR		*fdir;
 	t_list	*l_file;
@@ -122,10 +117,10 @@ t_ldir			*ft_parse(char **av, unsigned char *flags)
 	while (*av)
 	{
 		if (!(norme(*av, flags, &l_dir, fdir)))
-			ft_isnotdir(*av, &l_file, flags);
+			ft_isnotdir(*av, &l_file);
 		++av;
 	}
-	if (!l_file && !l_dir)
+	if ((!l_file && !l_dir) && (ac == 1))
 	{
 		if (!(fdir = opendir(".")))// trouver un endroit ou le close
 			perror("opendir");

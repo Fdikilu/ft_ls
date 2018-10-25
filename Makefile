@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/10/24 21:38:40 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/10/25 20:41:39 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC =\
 	ft_isnotdir.c \
 	ft_readdir.c \
 	ft_parse.c \
+	ft_printfile.c \
 	main.c
 
 OBJ = $(SRC:.c=.o)

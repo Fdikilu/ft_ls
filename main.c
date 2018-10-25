@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/24 22:06:19 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/25 14:42:29 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(int ac, char **av)
 	flags = NO_FLAG;
 	if (ac < 1)
 		return (0);
-	if (!(l_dir = ft_parse(av, &flags)))
+	if (!(l_dir = ft_parse(ac, av, &flags)))
 		return (0);
 	while (l_dir)
 	{
