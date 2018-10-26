@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/25 21:49:29 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/26 19:45:30 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ static t_info	*create_info(char *path)
 		perror("stat");
 		return (NULL);
 	}
-	if (!(info = (t_info *)malloc(sizeof(*info))))
+	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
 	info->name = path;
+	info->path = NULL;
 	info->s_st = struct_stat;
 	ft_mode(struct_stat, info->rights);
 	info->pwd = ft_pwd(struct_stat);
@@ -41,8 +42,8 @@ static char		**scut(char *name, int nlen, int i)
 		nlen--;
 	if ((nlen == 0) || !(tab = (char **)malloc(sizeof(char *) * 3)))
 		return (NULL);
-	if (!(tab[0] = (char *)malloc(sizeof(char) * (nlen + 1))) ||
-		!(tab[1] = (char *)malloc(sizeof(char) * (ft_strlen(name) - nlen))))
+	if (!(tab[0] = ft_strnew(nlen)) ||
+		!(tab[1] = ft_strnew(ft_strlen(name) - nlen)))
 		return (NULL);
 	while (nlen-- && (tab[0][i] = *name))
 	{
@@ -50,38 +51,21 @@ static char		**scut(char *name, int nlen, int i)
 		name++;
 	}
 	name++;
-	tab[0][i] = '\0';
-	i = 0;
-	while (*name && (tab[1][i] = *name))
-	{
-		i++;
-		name++;
-	}
-	tab[1][i] = '\0';
+	ft_strcpy(tab[1], name);
 	tab[2] = 0;
 	return (tab);
 }
 
 char			**scut2(char *name)
 {
-	int		i;
 	char	**tab;
 
 	if (!(tab = (char **)malloc(sizeof(char *) * 3)))
 		return (NULL);
-	if (!(tab[0] = (char *)malloc(sizeof(char) * 2)) ||
-		!(tab[1] = (char *)malloc(sizeof(char) * (ft_strlen(name) + 1))))
+	if ((!(tab[0] = ft_strnew(1))) || !(tab[1] = ft_strnew(ft_strlen(name))))
 		return (NULL);
 	tab[0][0] = '.';
-	tab[0][1] = '\0';
-	i = 0;
-	while (*name)
-	{
-		tab[1][i] = *name;
-		name++;
-		i++;
-	}
-	tab[1][i] = '\0';
+	ft_strcpy(tab[1], name);
 	tab[2] = 0;
 	return (tab);
 }

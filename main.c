@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/25 14:42:29 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/26 18:11:27 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int		main(int ac, char **av)
 		return (0);
 	while (l_dir)
 	{
-		if (!(tmp = ft_readdir(l_dir->f_dir)))
+		if (!(tmp = ft_readdir(l_dir->f_dir, l_dir->name)))
 			printf("nom %s\nfd %d\n", l_dir->name, (int)l_dir->f_dir);
+		printf("%s:\n", l_dir->name);
 		while (tmp)
 		{
-			printf("%s %s\n", ((t_info *)tmp->content)->rights, ((t_info *)tmp->content)->name);
+			printf("%s\n", ((t_info *)tmp->content)->name);
 			tmp = tmp->next;
 		}
 		l_dir = l_dir->next;

@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/25 20:46:17 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/26 17:41:26 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 typedef struct		s_info
 {
 	char			*name;
+	char			*path;
 	struct stat		s_st;
 	char			*time;
 	char			rights[11];
@@ -65,12 +66,13 @@ typedef struct		s_node
 }					t_node;
 
 t_bt				*ft_btnew(void const *data, size_t data_size);
+void				init_flags(char *s, unsigned char *flags);
 char				*ft_time(struct stat st_t);
 struct group		*ft_grp(struct stat stat_grp);
 struct passwd		*ft_pwd(struct stat stat_pwd);
 void				ft_mode(struct stat stat_m, char rights[11]);
 t_ldir				*ft_parse(int ac, char **av, unsigned char *flags);
-t_list				*ft_readdir(DIR *flux_dir);
+t_list				*ft_readdir(DIR *flux_dir, char *ndir);
 void				ft_content_swap(t_list *l1, t_list *l2);
 void				ft_ascii_sort(t_list *l_dir);
 void				ft_ascii_sortr(t_list *l_dir);
