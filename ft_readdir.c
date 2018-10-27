@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_dir.c                                         :+:      :+:    :+:   */
+/*   ft_readdir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/04 16:57:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/26 19:30:15 by fdikilu          ###   ########.fr       */
+/*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
+/*   Updated: 2018/10/27 21:34:56 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_info	*ft_info(struct dirent *struct_dir, char *path)
 {
 	t_info			*info;
-	
+
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
 	if (stat(path, &info->s_st) == -1)
@@ -29,7 +29,7 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 	return (info);
 }
 
-static char		*concat(char *ndir, char *nfile)
+char			*concat(char *ndir, char *nfile)
 {
 	char	*path;
 
@@ -41,7 +41,7 @@ static char		*concat(char *ndir, char *nfile)
 	return (path);
 }
 
-t_list	*ft_readdir(DIR *flux_dir, char *ndir)
+t_list			*ft_readdir(DIR *flux_dir, char *ndir)
 {
 	t_info			*info;
 	t_list			*l_indir;

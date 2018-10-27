@@ -6,61 +6,58 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/23 21:10:21 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:16:53 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_node	*create_node(char *name, DIR *f_dir)
+void	ft_ls(t_ldir *l_dir, unsigned char fl)
 {
-	t_node	*node;
+	DIR		*fd;
+	t_list	*l_indir;
+	t_list	*tmp;
+	t_ldir	*tmp_dir;
+	t_ldir	*l_rec;
+	char	*ndir;
 
-	if (!(node = (t_node*)malloc(sizeof(*node))))
-		return (NULL);
-	node->name = name;
-	node->f_dir = f_dir;
-	return (node);
+	l_rec = NULL;
+	while (l_dir)
+	{
+		tmp_dir = l_dir;
+		if (!(l_indir = ft_readdir(l_dir->f_dir, l_dir->name)))
+			return ;
+		tmp = l_indir;
+		//ft_sort(l_indir, fl);
+		printf("%s:\n", l_dir->name);
+		while (tmp)
+		{
+			printf("%s\n", ((t_info *)tmp->content)->name);//fonction display
+			ndir = concat(l_dir->name, ((t_info *)tmp->content)->name);
+			if (fl & FLAG_UPR && (fd = opendir(ndir)))
+				if ((ft_strcmp(((t_info *)tmp->content)->name, ".") != 0) &&
+					(ft_strcmp(((t_info *)tmp->content)->name, "..") != 0))
+					if (!(l_rec = listdir(ndir, fd, &l_rec)))
+						return ;
+			tmp = tmp->next;
+		}
+		ft_lstclr(&l_indir);
+		if (fl & FLAG_UPR && l_rec)
+			ft_ls(l_rec, fl);
+		//closedir
+		l_dir = l_dir->next;
+		//free((void *)tmp_dir);
+	}
 }
 
-static t_bt		*ls_create(char *name, DIR *)
+int	main(int ac, char **av)
 {
-	t_bt	*f_bt;
-	
-	ft
-}
+	t_ldir			*l_dir;
+	unsigned char	flags;
 
-static int		ls_print()
-{}
-
-static int		ls_free()
-{}
-
-void	ft_ls(char *name, DIR *fdir, unsigned char flags)
-{
-
-	ls_create();
-	ls_print();
-	ls_free();
-	if (flags & FLAG_UPR)
-		ft_ls();
-}
-
-int	main(void)
-{
-	DIR	*test;
-	t_bt	*bt_dir;
-	t_list	*list;
-	t_node	*node;
-
-	test = NULL;
-	node = create_node("test", test);
-	list = ft_lstnew(NULL,0);
-	bt_dir = ft_btnew(node, sizeof(*node));
-	free((void *)node);
-	printf("node: %zu\n", sizeof(*node));
-	printf("node: %zu\n", sizeof(*list));
-	printf("node: %zu\n", sizeof(*bt_dir));
-	printf("name : %s\n", ((t_node *)bt_dir->data)->name);
+	flags = NO_FLAG;
+	if (!(l_dir = ft_parse(ac, av, &flags)))
+		return (0);
+	ft_ls(l_dir, flags);
 	return (0);
 }

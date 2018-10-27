@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/10/26 17:41:58 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/10/27 19:30:57 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,10 @@ SRC =\
 	ft_isnotdir.c \
 	ft_readdir.c \
 	ft_parse.c \
+	ft_listdir.c \
 	ft_initflag.c \
 	ft_printfile.c \
-	main.c
+	ft_ls.c
 
 OBJ = $(SRC:.c=.o)
 

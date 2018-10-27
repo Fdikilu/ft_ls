@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/26 19:45:30 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/27 16:39:33 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char			**scut2(char *name)
 
 	if (!(tab = (char **)malloc(sizeof(char *) * 3)))
 		return (NULL);
-	if ((!(tab[0] = ft_strnew(1))) || !(tab[1] = ft_strnew(ft_strlen(name))))
+	if ((!(tab[0] = ft_strnew(1))) ||
+		!(tab[1] = ft_strnew(ft_strlen(name))))
 		return (NULL);
 	tab[0][0] = '.';
 	ft_strcpy(tab[1], name);
@@ -82,7 +83,10 @@ void			ft_isnotdir(char *name, t_list **lfile)
 		if (!(tab = scut2(name)))
 			return ;
 	if (!(flux_dir = opendir(tab[0])))
-		perror("opendir");
+	{
+		printf("ft_ls: %s: Not a directory\n", name);
+		return ;
+	}
 	while ((struct_dir = readdir(flux_dir)))
 		if (ft_strcmp(struct_dir->d_name, tab[1]) == 0)
 		{

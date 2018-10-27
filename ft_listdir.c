@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_listdir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 02:34:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 18:27:10 by fdikilu          ###   ########.fr       */
+/*   Created: 2018/10/27 18:03:11 by fdikilu           #+#    #+#             */
+/*   Updated: 2018/10/27 21:22:30 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+t_ldir	*listdir(char *s, DIR *fdir, t_ldir **l_dir)
 {
-	t_list			*tmp;
-	t_ldir			*l_dir;
-	unsigned char	flags;
+	t_ldir	*new;
+	t_ldir	*tmp;
 
-/*	flags = NO_FLAG;
-	if (!(l_dir = ft_parse(ac, av, &flags)))
-		return (0);*/
-	while (l_dir)
+	if (!(*l_dir))
 	{
-		if (!(tmp = ft_readdir(l_dir->f_dir, l_dir->name)))
-			return (0);
-		if (ac != 1)
-			printf("%s:\n", l_dir->name);
-		while (tmp)
-		{
-			printf("%s\n", ((t_info *)tmp->content)->name);
-			tmp = tmp->next;
-		}
-		l_dir = l_dir->next;
-		free((void *)tmp);
+		if (!(*l_dir = (t_ldir *)malloc(sizeof(**l_dir))))
+			return (NULL);
+		(*l_dir)->name = s;
+		(*l_dir)->f_dir = fdir;
+		(*l_dir)->next = NULL;
 	}
-	return (0);
+	else
+	{
+		tmp = *l_dir;
+		while (tmp->next)
+			tmp = tmp->next;
+		if (!(new = (t_ldir *)malloc(sizeof(*new))))
+			return (NULL);
+		new->name = s;
+		new->f_dir = fdir;
+		new->next = NULL;
+		tmp->next = new;
+	}
+	return (*l_dir);
 }
