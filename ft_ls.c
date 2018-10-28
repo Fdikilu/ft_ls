@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 22:16:53 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/28 19:50:38 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,24 @@ void	ft_ls(t_ldir *l_dir, unsigned char fl)
 		printf("%s:\n", l_dir->name);
 		while (tmp)
 		{
-			printf("%s\n", ((t_info *)tmp->content)->name);//fonction display
-			ndir = concat(l_dir->name, ((t_info *)tmp->content)->name);
-			if (fl & FLAG_UPR && (fd = opendir(ndir)))
-				if ((ft_strcmp(((t_info *)tmp->content)->name, ".") != 0) &&
-					(ft_strcmp(((t_info *)tmp->content)->name, "..") != 0))
+			printf("%s\n", ((t_info *)tmp->content)->name);//ft_display(tmp, fl);
+			if ((ft_strcmp(((t_info *)tmp->content)->name, ".") != 0) &&
+				(ft_strcmp(((t_info *)tmp->content)->name, "..") != 0))
+			{
+				ndir = concat(l_dir->name, ((t_info *)tmp->content)->name);
+				if (fl & FLAG_UPR && (fd = opendir(ndir)))
 					if (!(l_rec = listdir(ndir, fd, &l_rec)))
 						return ;
+			}
 			tmp = tmp->next;
 		}
 		ft_lstclr(&l_indir);
 		if (fl & FLAG_UPR && l_rec)
-			ft_ls(l_rec, fl);
+			while (l_rec)
+			{
+				ft_ls(l_rec, fl);
+				l_rec = l_rec->next;
+			}
 		//closedir
 		l_dir = l_dir->next;
 		//free((void *)tmp_dir);
