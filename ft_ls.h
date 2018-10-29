@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 22:40:09 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/29 18:02:55 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 typedef struct		s_info
 {
-	char			*name;
+	char			name[5096];
 	char			*path;
 	struct stat		s_st;
 	char			*time;
@@ -61,10 +61,7 @@ t_ldir				*listdir(char *s, DIR *fdir, t_ldir **l_dir);
 t_list				*ft_readdir(DIR *flux_dir, char *ndir);
 void				ft_content_swap(t_list *l1, t_list *l2);
 char				*concat(char *ndir, char *nfile);
-void				ft_ascii_sort(t_list *l_dir);
-void				ft_ascii_sortr(t_list *l_dir);
-void				ft_ascii_sort_time(t_list *l_dir);
-void				ft_ascii_sort_timer(t_list *l_dir);
+void				ft_sort(t_list *l_indir, unsigned char flags);
 int					ft_timecmp(struct stat st1, struct stat st2);
 void				ft_isnotdir(char *name, t_list **lfile);
 void				ft_print_file(t_list *l_file, unsigned char *flags);

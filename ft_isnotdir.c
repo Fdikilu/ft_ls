@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 16:39:33 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/29 17:11:25 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static t_info	*create_info(char *path)
 	t_info		*info;
 	struct stat	struct_stat;
 
-	if (stat(path, &struct_stat) == -1)
+	if (lstat(path, &struct_stat) == -1)
 	{
-		perror("stat");
+		perror("lstat");
 		return (NULL);
 	}
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
-	info->name = path;
+	ft_strcpy(info->name, path);
 	info->path = NULL;
 	info->s_st = struct_stat;
 	ft_mode(struct_stat, info->rights);

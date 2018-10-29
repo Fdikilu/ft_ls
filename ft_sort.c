@@ -6,13 +6,13 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:57:29 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/23 21:15:28 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/29 18:01:45 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_ascii_sort(t_list *l_dir)
+static void		ft_ascii_sort(t_list *l_dir)
 {
 	t_list	*tmp;
 
@@ -32,7 +32,7 @@ void		ft_ascii_sort(t_list *l_dir)
 	}
 }
 
-void		ft_ascii_sortr(t_list *l_dir)
+static void		ft_ascii_sortr(t_list *l_dir)
 {
 	t_list	*tmp;
 
@@ -52,7 +52,7 @@ void		ft_ascii_sortr(t_list *l_dir)
 	}
 }
 
-void		ft_ascii_sort_time(t_list *l_dir)
+static void		ft_ascii_sort_time(t_list *l_dir)
 {
 	t_list	*tmp;
 
@@ -72,7 +72,7 @@ void		ft_ascii_sort_time(t_list *l_dir)
 	}
 }
 
-void		ft_ascii_sort_timer(t_list *l_dir)
+static void		ft_ascii_sort_timer(t_list *l_dir)
 {
 	t_list	*tmp;
 
@@ -90,4 +90,16 @@ void		ft_ascii_sort_timer(t_list *l_dir)
 		}
 		ft_ascii_sort_timer(l_dir->next);
 	}
+}
+
+void		ft_sort(t_list *l_indir, unsigned char flags)
+{
+	if (flags & FLAG_R && !(flags & FLAG_T))
+		ft_ascii_sortr(l_indir);
+	else if (flags & FLAG_T && !(flags & FLAG_R))
+		ft_ascii_sort_time(l_indir);
+	else if (flags & FLAG_T && flags & FLAG_R)
+		ft_ascii_sort_timer(l_indir);
+	else
+		ft_ascii_sort(l_indir);
 }

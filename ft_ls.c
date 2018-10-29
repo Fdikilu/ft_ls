@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/28 19:50:38 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/29 20:17:52 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,17 @@ void	ft_ls(t_ldir *l_dir, unsigned char fl)
 	DIR		*fd;
 	t_list	*l_indir;
 	t_list	*tmp;
-	t_ldir	*tmp_dir;
 	t_ldir	*l_rec;
 	char	*ndir;
 
 	l_rec = NULL;
 	while (l_dir)
 	{
-		tmp_dir = l_dir;
 		if (!(l_indir = ft_readdir(l_dir->f_dir, l_dir->name)))
 			return ;
 		tmp = l_indir;
-		//ft_sort(l_indir, fl);
-		printf("%s:\n", l_dir->name);
+		ft_sort(l_indir, fl);
+		printf("\n%s:\n", l_dir->name);
 		while (tmp)
 		{
 			printf("%s\n", ((t_info *)tmp->content)->name);//ft_display(tmp, fl);
@@ -44,15 +42,15 @@ void	ft_ls(t_ldir *l_dir, unsigned char fl)
 			tmp = tmp->next;
 		}
 		ft_lstclr(&l_indir);
-		if (fl & FLAG_UPR && l_rec)
+		if (fl & FLAG_UPR)
 			while (l_rec)
 			{
 				ft_ls(l_rec, fl);
 				l_rec = l_rec->next;
 			}
-		//closedir
+		if (closedir(l_dir->f_dir) == -1)
+			perror("closedir");
 		l_dir = l_dir->next;
-		//free((void *)tmp_dir);
 	}
 }
 

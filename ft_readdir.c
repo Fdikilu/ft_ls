@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 21:34:56 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/29 17:14:35 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
-	if (stat(path, &info->s_st) == -1)
-		perror("stat");
-	info->name = struct_dir->d_name;
+	if (lstat(path, &info->s_st) == -1)
+		perror("lstat");
+	ft_strcpy(info->name, struct_dir->d_name);
 	info->path = path;
 	info->time = ft_time(info->s_st);
 	ft_mode(info->s_st, info->rights);
