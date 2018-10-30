@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 01:03:43 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 20:03:25 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/30 19:30:25 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
+# define BASE "0123456789abcdefghijklmnopqrstuvwxyz"
 
 typedef struct		s_list
 {
@@ -33,6 +35,7 @@ int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
+char				*ft_itoa_base(unsigned long n, int base);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstclr(t_list **begin_list);

@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/29 18:02:55 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/30 23:10:35 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 typedef struct		s_info
 {
+	char			*buf;
 	char			name[5096];
 	char			*path;
 	struct stat		s_st;

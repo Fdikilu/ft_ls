@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/29 17:14:35 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/30 23:49:53 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 	info->path = path;
 	info->time = ft_time(info->s_st);
 	ft_mode(info->s_st, info->rights);
+	if (info->rights[0] == 'l')
+	{
+		info->buf = ft_strnew(1024);
+		if (readlink(path, info->buf, 1024) == -1)
+			perror("readlink");
+	}
+	else
+		info->buf = NULL;
 	info->pwd = ft_pwd(info->s_st);
 	info->grp = ft_grp(info->s_st);
 	return (info);

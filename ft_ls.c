@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/29 20:17:52 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/31 00:30:14 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_ls(t_ldir *l_dir, unsigned char fl)
 		tmp = l_indir;
 		ft_sort(l_indir, fl);
 		printf("\n%s:\n", l_dir->name);
+		//affichage total ??? pour l'otion -l st_blocks
 		while (tmp)
 		{
 			printf("%s\n", ((t_info *)tmp->content)->name);//ft_display(tmp, fl);
