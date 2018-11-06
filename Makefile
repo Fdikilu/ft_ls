@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/10/28 18:22:54 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/11/06 16:11:51 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC =\
 	ft_listdir.c \
 	ft_initflag.c \
 	ft_printfile.c \
+	ft_display.c \
 	ft_ls.c
 
 OBJ = $(SRC:.c=.o)

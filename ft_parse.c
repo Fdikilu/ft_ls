@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/27 21:07:41 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/06 22:57:46 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 static int		norme(char *av, unsigned char *fl, t_ldir **l_d, DIR *fd)
 {
-	if (*fl & FLAG_ERR || (*av == '-' && ft_strlen(av) == 1))
-	{
-		printf("usage: [-lRart] [file ...]\n");
+	if (*fl & FLAG_ERR)
 		return (1);
-	}
-	else if (*av == '-')
+	else if (*av == '-' && ft_strlen(av) > 1)
 		init_flags(av, fl);
 	else if ((fd = opendir(av)))
 	{
@@ -51,12 +48,13 @@ t_ldir			*ft_parse(int ac, char **av, unsigned char *flags)
 			ft_isnotdir(*av, &l_file);
 		++av;
 	}
-	if ((!l_file && !l_dir) && (ac == 1))
-	{
-		if (!(fdir = opendir(".")))
-			perror("opendir");
-		l_dir = listdir(".", fdir, &l_dir);
-	}
+	if ((!l_file && !l_dir) && ac <= 2)
+		if (*flags != NO_FLAG || *flags & FLAG_TIR)
+		{
+			if (!(fdir = opendir(".")))
+				perror("opendir");
+			l_dir = listdir(".", fdir, &l_dir);
+		}
 	if (l_file)
 		ft_print_file(l_file, flags);
 	return (l_dir);

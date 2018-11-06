@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/30 23:10:35 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/06 22:50:12 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,23 @@
 
 # define FLAGS "lRart"
 
+# define C_NONE		"\033[0m"
+# define C_RED		"\033[31m"//exe
+# define C_GREEN	"\033[32m"//file
+# define C_YELLOW	"\033[33m"// /dev/ c---
+# define C_BLUE		"\033[34m"//dir
+# define C_MAGENTA	"\033[35m"// /dev/ b---
+# define C_CYAN		"\033[36m"// liensymbo
+# define C_ORANGE	"\033[91m"// socket
+
 # define NO_FLAG 0
 # define FLAG_L 1
 # define FLAG_R 2
 # define FLAG_A 4
 # define FLAG_UPR 8
 # define FLAG_T 16
+# define FLAG_UPG 32
+# define FLAG_TIR 64
 # define FLAG_ERR 128
 
 # include <sys/types.h>
@@ -36,7 +47,7 @@
 typedef struct		s_info
 {
 	char			*buf;
-	char			name[5096];
+	char			name[2048];
 	char			*path;
 	struct stat		s_st;
 	char			*time;
@@ -66,6 +77,7 @@ void				ft_sort(t_list *l_indir, unsigned char flags);
 int					ft_timecmp(struct stat st1, struct stat st2);
 void				ft_isnotdir(char *name, t_list **lfile);
 void				ft_print_file(t_list *l_file, unsigned char *flags);
+void				ft_display(t_info *info, unsigned char flags, int size[5]);
 void				ft_ls(t_ldir *l_dir, unsigned char fl);
 
 #endif

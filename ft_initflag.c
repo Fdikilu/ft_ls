@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 17:39:45 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/26 17:42:03 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/06 22:50:53 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ static void		flags_on(unsigned char *tmp, int c)
 		*tmp |= FLAG_R;
 	else if (c == 't')
 		*tmp |= FLAG_T;
+	else if (c == 'G')
+		*tmp |= FLAG_UPG;
 	else if (c == '-' && (*tmp == NO_FLAG))
+	{
+		*tmp |= FLAG_TIR;
 		return ;
+	}
 	else
 	{
 		*tmp |= FLAG_ERR;

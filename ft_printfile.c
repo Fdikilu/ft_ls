@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 20:40:50 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/31 00:29:55 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/10/31 19:14:55 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			ft_print_file(t_list *l_file, unsigned char *flags)
 				printf("\n");
 			l_file = l_file->next;
 		}
-		printf("%d\n", i);
 	}
 	else
 	{
