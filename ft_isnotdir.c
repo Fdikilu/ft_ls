@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/30 23:49:56 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/07 22:25:30 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static t_info	*create_info(char *path)
 	struct stat	struct_stat;
 
 	if (lstat(path, &struct_stat) == -1)
-	{
-		perror("lstat");
 		return (NULL);
-	}
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
 	ft_strcpy(info->name, path);
@@ -79,7 +76,7 @@ char			**scut2(char *name)
 	return (tab);
 }
 
-void			ft_isnotdir(char *name, t_list **lfile)
+int				ft_isnotdir(char *name, t_list **lfile)
 {
 	struct dirent	*struct_dir;
 	DIR				*flux_dir;
@@ -89,24 +86,26 @@ void			ft_isnotdir(char *name, t_list **lfile)
 	tmp = NULL;
 	if (!(tab = scut(name, ft_strlen(name), 0)))
 		if (!(tab = scut2(name)))
-			return ;
+			return (1);
 	if (!(flux_dir = opendir(tab[0])))
 	{
-		printf("ft_ls: %s: Not a directory\n", name);
-		return ;
+		ft_putstr("ft_ls: ");
+		perror(name);
+		return (1);
 	}
 	while ((struct_dir = readdir(flux_dir)))
 		if (ft_strcmp(struct_dir->d_name, tab[1]) == 0)
 		{
 			if (!(tmp = create_info(name)))
-				return ;
-			if (!(*lfile) && (*lfile = ft_lstnew((t_info *)tmp, sizeof(*tmp))))
-				return ;
+				return (1);
+			if (!(*lfile))
+				*lfile = ft_lstnew((t_info *)tmp, sizeof(*tmp));
 			else
-			{
 				ft_lstadd(lfile, ft_lstnew((t_info *)tmp, sizeof(*tmp)));
-				return ;
-			}
+			closedir(flux_dir);
+			return (1);
 		}
-	printf("ft_ls: %s: No such file or directory\n", name);
-}
+	ft_putstr("ft_ls: ");
+	perror(name);
+	return (0);
+}//free les tab[0] tab[1] tab

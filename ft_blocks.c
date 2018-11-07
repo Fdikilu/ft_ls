@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printfile.c                                     :+:      :+:    :+:   */
+/*   ft_blocks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/25 20:40:50 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/07 18:22:24 by fdikilu          ###   ########.fr       */
+/*   Created: 2018/11/07 17:23:46 by fdikilu           #+#    #+#             */
+/*   Updated: 2018/11/07 17:37:18 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			ft_print_file(t_list *l_file, unsigned char *flags)
+void	ft_blocks(t_list *l_indir, unsigned char flags)
 {
-	int		size[5];
-	t_list	*tmp;
+	int		nb_blocks;
 
-	(*flags & FLAG_L) ? l_option(l_file, size): 0;
-	ft_sort(l_file, *flags);
-	tmp = l_file;
-	while (tmp)
+	nb_blocks = 0;
+	while (l_indir)
 	{
-		ft_display(tmp->content, *flags, size);
-		tmp = tmp->next;
+		if (((t_info *)l_indir->content)->name[0] != '.')
+			nb_blocks += ((t_info *)l_indir->content)->s_st.st_blocks;
+		else if (flags & FLAG_A)
+			nb_blocks += ((t_info *)l_indir->content)->s_st.st_blocks;
+		l_indir = l_indir->next;
 	}
-	ft_lstclr(&l_file);
+	ft_putstr("total ");
+	ft_putnbr(nb_blocks);
+	ft_putchar('\n');
 }

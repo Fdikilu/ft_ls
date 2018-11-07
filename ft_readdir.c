@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/30 23:49:53 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/07 20:39:43 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 	if (!(info = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
 	if (lstat(path, &info->s_st) == -1)
-		perror("lstat");
+	{
+		free((void *)info);
+		return (NULL);
+	}
 	ft_strcpy(info->name, struct_dir->d_name);
 	info->path = path;
 	info->time = ft_time(info->s_st);
@@ -66,4 +69,4 @@ t_list			*ft_readdir(DIR *flux_dir, char *ndir)
 			l_indir = ft_lstnew((t_info *)info, sizeof(*info));
 	}
 	return (l_indir);
-}
+}//free info->path

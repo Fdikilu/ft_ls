@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/11/06 16:11:51 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/11/07 17:49:17 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ GFLAGS = -fsanitize=address -Wall -Wextra -Werror
 
 SRC =\
 	ft_content_swap.c \
+	ft_blocks.c \
+	ft_loption.c \
 	ft_sort.c \
 	ft_pwd.c \
 	ft_grp.c \

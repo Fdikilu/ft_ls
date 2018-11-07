@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:27:33 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/06 21:02:02 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/07 19:59:23 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*todisp2(char *info, char *str, int size)
 	return (str);
 }
 
-static void	l_option(t_info *info, unsigned char flags, int size[5])
+static void	l_op(t_info *info, unsigned char flags, int size[5])
 {
 	char	nlink[size[0] + 1];
 	char	pwd[size[1] + 1];
@@ -120,7 +120,7 @@ static void	l_option(t_info *info, unsigned char flags, int size[5])
 void		ft_display(t_info *info, unsigned char flags, int size[5])
 {
 	if (flags & FLAG_L)
-		l_option(info, flags, size);
+		l_op(info, flags, size);
 	else if (flags & FLAG_UPG)
 	{
 		select_color(info->rights);
