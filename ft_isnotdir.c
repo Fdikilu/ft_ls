@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/07 22:25:30 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/09 23:11:40 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,18 @@ int				ft_isnotdir(char *name, t_list **lfile)
 		if (!(tab = scut2(name)))
 			return (1);
 	if (!(flux_dir = opendir(tab[0])))
-	{
+	{//free tab
 		ft_putstr("ft_ls: ");
 		perror(name);
-		return (1);
+		return (0);
 	}
 	while ((struct_dir = readdir(flux_dir)))
+	{
+		if (errno == 13)
+		{//free tab
+			perror("ft_ls");
+			return (0);
+		}
 		if (ft_strcmp(struct_dir->d_name, tab[1]) == 0)
 		{
 			if (!(tmp = create_info(name)))
@@ -105,6 +111,7 @@ int				ft_isnotdir(char *name, t_list **lfile)
 			closedir(flux_dir);
 			return (1);
 		}
+	}
 	ft_putstr("ft_ls: ");
 	perror(name);
 	return (0);

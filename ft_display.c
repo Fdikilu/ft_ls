@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:27:33 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/07 19:59:23 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/09 20:32:16 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,14 @@ static void	l_op(t_info *info, unsigned char flags, int size[5])
 		ft_putstr(C_NONE);
 		ft_putstr(" -> ");
 		ft_putstr(info->buf);
-		free((void *)info->buf);
 	}
 	ft_putchar('\n');
 }
 
 void		ft_display(t_info *info, unsigned char flags, int size[5])
 {
+	if (info->name[0] == '.' && !(flags & FLAG_A))
+		return ;
 	if (flags & FLAG_L)
 		l_op(info, flags, size);
 	else if (flags & FLAG_UPG)
@@ -133,4 +134,6 @@ void		ft_display(t_info *info, unsigned char flags, int size[5])
 		ft_putchar('\n');
 	}
 	ft_putstr(C_NONE);
+	(info->rights[0] == 'l') ? free((void *)info->buf) : 0;
+	free((void *)info->path);
 }

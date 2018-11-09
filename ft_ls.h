@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/07 23:14:53 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/09 22:16:24 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <errno.h>
 # include <grp.h>
 # include <pwd.h>
 # include <unistd.h>
@@ -58,8 +59,8 @@ typedef struct		s_info
 
 typedef struct		s_ldir
 {
-	char			*name;
-	DIR				*f_dir;
+	char			*name;//free dans ft_free
+	struct stat		s_st;
 	struct s_ldir	*next;
 }					t_ldir;
 
@@ -70,9 +71,9 @@ char				*ft_time(struct stat st_t);
 struct group		*ft_grp(struct stat stat_grp);
 struct passwd		*ft_pwd(struct stat stat_pwd);
 void				ft_mode(struct stat stat_m, char rights[11]);
-t_ldir				*ft_parse(int ac, char **av, unsigned char *flags);
-t_ldir				*listdir(char *s, DIR *fdir, t_ldir **l_dir);
-t_list				*ft_readdir(DIR *flux_dir, char *ndir);
+t_ldir				*ft_parse(char **av, unsigned char *flags);
+t_ldir				*listdir(char *s, t_ldir **l_dir, struct stat s_st);
+t_list				*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned char flags);
 void				ft_content_swap(t_list *l1, t_list *l2);
 char				*concat(char *ndir, char *nfile);
 void				ft_sort(t_list *l_indir, unsigned char flags);
@@ -80,6 +81,6 @@ int					ft_timecmp(struct stat st1, struct stat st2);
 int					ft_isnotdir(char *name, t_list **lfile);
 void				ft_print_file(t_list *l_file, unsigned char *flags);
 void				ft_display(t_info *info, unsigned char flags, int size[5]);
-void				ft_ls(t_ldir *l_dir, unsigned char fl, int l);
+void				ft_ls(t_ldir *l_dir, unsigned char fl, int frst);
 
 #endif
