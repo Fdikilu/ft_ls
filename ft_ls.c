@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/09 22:15:41 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/10 22:20:57 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_rec(char *d, t_info *info, unsigned char fl, t_ldir **rec)
 {
 	char	*ndir;
 
-	if ((ft_strcmp(info->name, ".") != 0) && 
+	if ((ft_strcmp(info->name, ".") != 0) &&
 		(ft_strcmp(info->name, "..") != 0))
 	{
 		if (!(ndir = concat(d, info->name)))
@@ -41,7 +41,7 @@ static void	ft_indir(t_ldir *d, t_list *l, unsigned char fl, t_ldir **rec)
 	if (!(l = ft_readdir(d, &flux_dir, fl)))
 		return ;
 	ft_sort(l, fl);
-	(fl & FLAG_L) ? l_option(l, size) : 0;
+	(fl & FLAG_L) ? l_sizecolonne(l, size) : 0;
 	(fl & FLAG_L) ? ft_blocks(l, fl) : 0;
 	tmp = l;
 	while (tmp)
@@ -59,6 +59,7 @@ void		ft_ls(t_ldir *l_dir, unsigned char fl, int frst)
 {
 	t_list	*l_indir;
 	t_ldir	*l_rec;
+	t_ldir	*tmp;
 
 	l_indir = NULL;
 	l_rec = NULL;
@@ -69,18 +70,22 @@ void		ft_ls(t_ldir *l_dir, unsigned char fl, int frst)
 	}
 	ft_indir(l_dir, l_indir, fl, &l_rec);
 	ft_putchar('\n');
+	tmp = l_rec;
 	if (fl & FLAG_UPR)
 		while (l_rec)
 		{
 			ft_ls(l_rec, fl, 1);
 			l_rec = l_rec->next;
 		}
+	if (tmp)
+		rec_free(tmp);
 	l_dir = l_dir->next;
 }
 
 int			main(int ac, char **av)
 {
 	int				frst;
+	t_ldir			*tmp;
 	t_ldir			*l_dir;
 	unsigned char	flags;
 
@@ -90,18 +95,16 @@ int			main(int ac, char **av)
 	if (!(l_dir = ft_parse(av, &flags)))
 	{
 		if (flags & FLAG_ERR)
-		{
-			ft_putstr("ft_ls: illegal option -- -\n");
-			ft_putstr("usage: [-GRalrt] [file ...]\n");
-			//free l_dir
-		}
+			ft_putstr("ft_ls: illegal option\nusage: [-GRalrt] [file ...]\n");
 		return (0);
 	}
 	while (l_dir)
 	{
+		tmp = l_dir;
 		ft_ls(l_dir, flags, frst);
 		frst = 1;
 		l_dir = l_dir->next;
+		free((void *)tmp);
 	}
 	return (0);
 }

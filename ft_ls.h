@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/09 22:16:24 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/10 22:55:11 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,30 @@ typedef struct		s_info
 
 typedef struct		s_ldir
 {
-	char			*name;//free dans ft_free
+	char			*name;
 	struct stat		s_st;
 	struct s_ldir	*next;
 }					t_ldir;
 
+void				select_color(char *rights);
+char				*todisp(char *info, char *str, int size);
+char				*todisp2(char *info, char *str, int size);
+char				*concat(char *ndir, char *nfile);
+void				rec_free(t_ldir *rec);
+void				tab_free(char **tab);
 void				init_flags(char *s, unsigned char *flags);
 void				ft_blocks(t_list *l_indir, unsigned char flags);
-void				l_option(t_list *l_indir, int size[5]);
+void				l_sizecolonne(t_list *l_indir, int size[5]);
+void				ft_loption(t_info *info, unsigned char flags, int size[5]);
 char				*ft_time(struct stat st_t);
 struct group		*ft_grp(struct stat stat_grp);
 struct passwd		*ft_pwd(struct stat stat_pwd);
 void				ft_mode(struct stat stat_m, char rights[11]);
 t_ldir				*ft_parse(char **av, unsigned char *flags);
 t_ldir				*listdir(char *s, t_ldir **l_dir, struct stat s_st);
-t_list				*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned char flags);
+t_list				*ft_readdir(t_ldir *dir, \
+	DIR **flux_dir, unsigned char flags);
 void				ft_content_swap(t_list *l1, t_list *l2);
-char				*concat(char *ndir, char *nfile);
 void				ft_sort(t_list *l_indir, unsigned char flags);
 int					ft_timecmp(struct stat st1, struct stat st2);
 int					ft_isnotdir(char *name, t_list **lfile);

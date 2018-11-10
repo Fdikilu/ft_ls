@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/09 21:09:21 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/10 21:27:49 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ t_ldir		*ft_parse(char **av, unsigned char *flags)
 	here = 1;
 	while (*av)
 	{
-		if (!(norme(*av, flags, &l_dir)))
-			here = ft_isnotdir(*av, &l_file);
+		(!(norme(*av, flags, &l_dir))) ? here = ft_isnotdir(*av, &l_file) : 0;
 		if (*flags & FLAG_ERR)
 			return (NULL);
 		++av;

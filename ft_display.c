@@ -6,13 +6,13 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:27:33 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/09 20:32:16 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/10 22:55:33 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	select_color(char *rights)
+void	select_color(char *rights)
 {
 	if (rights[0] == 'd')
 		ft_putstr(C_BLUE);
@@ -31,7 +31,7 @@ static void	select_color(char *rights)
 			ft_putstr(C_RED);
 }
 
-static char	*todisp(char *info, char *str, int size)
+char	*todisp(char *info, char *str, int size)
 {
 	int		leninfo;
 
@@ -50,7 +50,7 @@ static char	*todisp(char *info, char *str, int size)
 	return (str);
 }
 
-static char	*todisp2(char *info, char *str, int size)
+char	*todisp2(char *info, char *str, int size)
 {
 	int		i;
 
@@ -69,59 +69,12 @@ static char	*todisp2(char *info, char *str, int size)
 	return (str);
 }
 
-static void	l_op(t_info *info, unsigned char flags, int size[5])
-{
-	char	nlink[size[0] + 1];
-	char	pwd[size[1] + 1];
-	char	grp[size[2] + 1];
-	char	major[size[3] + 1];
-	char	minsiz[size[4] + 1];
-
-	ft_putstr(info->rights);
-	ft_putstr("  ");
-	ft_putstr(todisp(ft_itoa(info->s_st.st_nlink), nlink, size[0]));
-	ft_putchar(' ');
-	ft_putstr(todisp2(info->pwd->pw_name, pwd, size[1]));
-	ft_putstr("  ");
-	ft_putstr(todisp2(info->grp->gr_name, grp, size[2]));
-	ft_putstr("  ");
-	(size[3] > 0) ? ft_putchar(' ') : 0;
-	if (info->rights[0] == 'c' || info->rights[0] == 'b')
-	{
-		ft_putstr(todisp(ft_itoa(major(info->s_st.st_rdev)), major, size[3]));
-		ft_putchar(',');
-		ft_putstr(todisp(ft_itoa(minor(info->s_st.st_rdev)), minsiz, size[4]));
-	}
-	else
-	{
-		if (size[3])
-		{
-			ft_putstr(todisp(ft_strnew(0), major, size[3]));
-			ft_putchar(' ');
-		}
-		ft_putstr(todisp(ft_itoa(info->s_st.st_size), minsiz, size[4]));
-	}
-	ft_putchar(' ');
-	ft_putstr(info->time);
-	ft_putchar(' ');
-	if (flags & FLAG_UPG)
-		select_color(info->rights);
-	ft_putstr(info->name);
-	if (info->rights[0] == 'l')
-	{
-		ft_putstr(C_NONE);
-		ft_putstr(" -> ");
-		ft_putstr(info->buf);
-	}
-	ft_putchar('\n');
-}
-
-void		ft_display(t_info *info, unsigned char flags, int size[5])
+void	ft_display(t_info *info, unsigned char flags, int size[5])
 {
 	if (info->name[0] == '.' && !(flags & FLAG_A))
 		return ;
 	if (flags & FLAG_L)
-		l_op(info, flags, size);
+		ft_loption(info, flags, size);
 	else if (flags & FLAG_UPG)
 	{
 		select_color(info->rights);

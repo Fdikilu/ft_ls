@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/09 23:11:40 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/10 20:53:32 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,43 +76,56 @@ char			**scut2(char *name)
 	return (tab);
 }
 
-int				ft_isnotdir(char *name, t_list **lfile)
+static int		filedir(DIR **fdir, char **tab, t_list **lfile, char *name)
 {
-	struct dirent	*struct_dir;
-	DIR				*flux_dir;
 	t_info			*tmp;
-	char			**tab;
+	struct dirent	*struct_dir;
 
 	tmp = NULL;
-	if (!(tab = scut(name, ft_strlen(name), 0)))
-		if (!(tab = scut2(name)))
-			return (1);
-	if (!(flux_dir = opendir(tab[0])))
-	{//free tab
-		ft_putstr("ft_ls: ");
-		perror(name);
-		return (0);
-	}
-	while ((struct_dir = readdir(flux_dir)))
+	while ((struct_dir = readdir(*fdir)))
 	{
 		if (errno == 13)
-		{//free tab
+		{
 			perror("ft_ls");
 			return (0);
 		}
 		if (ft_strcmp(struct_dir->d_name, tab[1]) == 0)
 		{
 			if (!(tmp = create_info(name)))
-				return (1);
+				return (0);
 			if (!(*lfile))
 				*lfile = ft_lstnew((t_info *)tmp, sizeof(*tmp));
 			else
 				ft_lstadd(lfile, ft_lstnew((t_info *)tmp, sizeof(*tmp)));
-			closedir(flux_dir);
-			return (1);
+			closedir(*fdir);
+			return (0);
 		}
 	}
+	return (1);
+}
+
+int				ft_isnotdir(char *name, t_list **lfile)
+{
+	DIR				*flux_dir;
+	char			**tab;
+
+	if (!(tab = scut(name, ft_strlen(name), 0)))
+		if (!(tab = scut2(name)))
+			return (1);
+	if (!(flux_dir = opendir(tab[0])))
+	{
+		tab_free(tab);
+		ft_putstr("ft_ls: ");
+		perror(name);
+		return (0);
+	}
+	if (!(filedir(&flux_dir, tab, lfile, name)))
+	{
+		tab_free(tab);
+		return (0);
+	}
+	tab_free(tab);
 	ft_putstr("ft_ls: ");
 	perror(name);
 	return (0);
-}//free les tab[0] tab[1] tab
+}

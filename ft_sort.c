@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:57:29 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/10/29 18:01:45 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/10 18:48:43 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void		ft_ascii_sort_timer(t_list *l_dir)
 	}
 }
 
-void		ft_sort(t_list *l_indir, unsigned char flags)
+void			ft_sort(t_list *l_indir, unsigned char flags)
 {
 	if (flags & FLAG_R && !(flags & FLAG_T))
 		ft_ascii_sortr(l_indir);

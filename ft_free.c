@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_btnew.c                                         :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/31 02:36:48 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/31 12:21:37 by fdikilu          ###   ########.fr       */
+/*   Created: 2018/11/10 14:57:15 by fdikilu           #+#    #+#             */
+/*   Updated: 2018/11/10 18:02:36 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_bt	*ft_btnew(void const *data, size_t data_size)
+void	rec_free(t_ldir *rec)
 {
-	t_bt	*bt;
-	bt = NULL;
-	if (!(bt = (t_bt *)malloc((sizeof(*bt)))))
-		return (NULL);
-	if (!data)
+	t_ldir	*tmp;
+
+	while (rec)
 	{
-		bt->data = NULL;
-		bt->data_size = 0;
-		bt->l = NULL;
-		bt->r = NULL;
+		tmp = rec;
+		rec = rec->next;
+		free((void *)tmp->name);
+		free((void *)tmp);
 	}
-	else
-	{
-		if (!(bt->data = (void *)malloc(data_size)))
-			return (NULL);
-		ft_memcpy(bt->data, data, data_size);
-		bt->data_size = data_size;
-		bt->l = NULL;
-		bt->r = NULL;
-	}
-	return (bt);
+}
+
+void	tab_free(char **tab)
+{
+	free((void *)tab[0]);
+	free((void *)tab[1]);
+	free((void *)tab);
 }
