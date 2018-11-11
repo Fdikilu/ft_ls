@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/11/10 22:30:13 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/11/11 21:03:39 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB_DIR = libft
 
 LIB = $(LIB_DIR)/libft.a
 
-GFLAGS = -fsanitize=address -Wall -Wextra -Werror
+GFLAGS = -g -Wall -Wextra -Werror
 
 SRC =\
 	ft_content_swap.c \
