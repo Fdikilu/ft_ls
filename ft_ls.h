@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/11 20:12:04 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/17 19:17:17 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char				*todisp2(char *info, char *str, int size);
 char				*concat(char *ndir, char *nfile);
 void				rec_free(t_ldir *rec);
 void				tab_free(char **tab);
+void				lindir_free(t_list *l_indir);
 void				init_flags(char *s, unsigned char *flags);
 void				ft_blocks(t_list *l_indir, unsigned char flags);
 void				l_sizecolonne(t_list *l_indir, int size[5]);

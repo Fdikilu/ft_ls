@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 23:52:38 by fdikilu           #+#    #+#             */
-/*   Updated: 2016/12/01 14:31:53 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/14 16:01:11 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char		*ft_itoa(int n)
 		return (NULL);
 	str[len_str] = '\0';
 	nb = (n < 0) ? -n : n;
-	while (len_str >= 0)
+	while (len_str > 0)
 	{
 		len_str--;
 		str[len_str] = (nb % 10) + 48;

@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 20:53:32 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/18 00:08:52 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static int		filedir(DIR **fdir, char **tab, t_list **lfile, char *name)
 		if (errno == 13)
 		{
 			perror("ft_ls");
+			closedir(*fdir);
 			return (0);
 		}
 		if (ft_strcmp(struct_dir->d_name, tab[1]) == 0)
@@ -97,10 +98,12 @@ static int		filedir(DIR **fdir, char **tab, t_list **lfile, char *name)
 				*lfile = ft_lstnew((t_info *)tmp, sizeof(*tmp));
 			else
 				ft_lstadd(lfile, ft_lstnew((t_info *)tmp, sizeof(*tmp)));
+			free((void *)tmp);
 			closedir(*fdir);
 			return (0);
 		}
 	}
+	closedir(*fdir);
 	return (1);
 }
 
@@ -124,7 +127,7 @@ int				ft_isnotdir(char *name, t_list **lfile)
 		tab_free(tab);
 		return (0);
 	}
-	tab_free(tab);
+	tab_free(tab);//if rights[0] == 'l' ft_display(tout) || ft_ls /var
 	ft_putstr("ft_ls: ");
 	perror(name);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:27:33 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 22:55:33 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/17 22:52:42 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,12 @@ char	*todisp2(char *info, char *str, int size)
 void	ft_display(t_info *info, unsigned char flags, int size[5])
 {
 	if (info->name[0] == '.' && !(flags & FLAG_A))
+	{
+		(info->rights[0] == 'l') ? free((void *)info->buf) : 0;
+		free((void *)info->time);
+		free((void *)info->path);
 		return ;
+	}
 	if (flags & FLAG_L)
 		ft_loption(info, flags, size);
 	else if (flags & FLAG_UPG)
@@ -88,5 +93,6 @@ void	ft_display(t_info *info, unsigned char flags, int size[5])
 	}
 	ft_putstr(C_NONE);
 	(info->rights[0] == 'l') ? free((void *)info->buf) : 0;
+	free((void *)info->time);
 	free((void *)info->path);
 }

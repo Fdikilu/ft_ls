@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 18:51:35 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/17 22:07:11 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,20 @@ t_list			*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned char flags)
 	while ((s_dir = readdir(*flux_dir)))
 	{
 		if (errno == 13 && !(dir->s_st.st_mode & S_IWUSR) && (flags & FLAG_L))
+		{
+			if (l_indir)
+				lindir_free(l_indir);
+			if (closedir(*flux_dir) == -1)
+				perror("closedir");
 			return (NULL);
+		}
 		if (!(info = ft_info(s_dir, concat(dir->name, s_dir->d_name))))
 			return (NULL);
 		if (l_indir)
 			ft_lstadd(&l_indir, ft_lstnew((t_info *)info, sizeof(*info)));
 		else
 			l_indir = ft_lstnew((t_info *)info, sizeof(*info));
+		free((void *)info);
 	}
 	return (l_indir);
 }

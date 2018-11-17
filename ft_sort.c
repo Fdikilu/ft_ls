@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 11:57:29 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 18:48:43 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/14 17:23:34 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ static void		ft_ascii_sort_time(t_list *l_dir)
 			if (ft_timecmp(((t_info *)l_dir->content)->s_st,
 				((t_info *)tmp->content)->s_st) < 0)
 				ft_content_swap(l_dir, tmp);
+			else if (ft_timecmp(((t_info *)l_dir->content)->s_st,
+				((t_info *)tmp->content)->s_st) == 0)
+				if (ft_strcmp(((t_info *)l_dir->content)->name,
+					((t_info *)tmp->content)->name) > 0)
+					ft_content_swap(l_dir, tmp);
 			tmp = tmp->next;
 		}
 		ft_ascii_sort_time(l_dir->next);
@@ -86,6 +91,11 @@ static void		ft_ascii_sort_timer(t_list *l_dir)
 			if (ft_timecmp(((t_info *)l_dir->content)->s_st,
 				((t_info *)tmp->content)->s_st) > 0)
 				ft_content_swap(l_dir, tmp);
+			else if (ft_timecmp(((t_info *)l_dir->content)->s_st,
+				((t_info *)tmp->content)->s_st) == 0)
+				if (ft_strcmp(((t_info *)l_dir->content)->name,
+					((t_info *)tmp->content)->name) < 0)
+					ft_content_swap(l_dir, tmp);
 			tmp = tmp->next;
 		}
 		ft_ascii_sort_timer(l_dir->next);
