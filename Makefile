@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/11/13 22:46:45 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/11/18 20:06:38 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,11 @@ LIB_DIR = libft
 
 LIB = $(LIB_DIR)/libft.a
 
-GFLAGS = -g -Wall -Wextra -Werror
+GFLAGS = -Wall -Wextra -Werror
 
 SRC =\
 	ft_content_swap.c \
+	ft_tools.c \
 	ft_blocks.c \
 	ft_lsizecolonne.c \
 	ft_loption.c \

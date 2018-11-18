@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/17 22:07:11 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/18 20:09:41 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,29 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 	return (info);
 }
 
-char			*concat(char *ndir, char *nfile)
+static int		set_indir(unsigned char flags, struct dirent *s_dir,
+	t_ldir *dir, t_list **l_indir)
 {
-	char	*path;
+	t_info			*info;
 
-	if (!(path = ft_strnew(ft_strlen(ndir) + ft_strlen(nfile) + 1)))
-		return (NULL);
-	ft_strcpy(path, ndir);
-	ft_strcat(path, "/");
-	ft_strcat(path, nfile);
-	return (path);
+	if (errno == 13 && !(dir->s_st.st_mode & S_IWUSR) && (flags & FLAG_L))
+	{
+		if (*l_indir)
+			lindir_free(*l_indir);
+		return (0);
+	}
+	if (!(info = ft_info(s_dir, concat(dir->name, s_dir->d_name))))
+		return (0);
+	if (*l_indir)
+		ft_lstadd(l_indir, ft_lstnew((t_info *)info, sizeof(*info)));
+	else
+		*l_indir = ft_lstnew((t_info *)info, sizeof(*info));
+	free((void *)info);
+	return (1);
 }
 
 t_list			*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned char flags)
 {
-	t_info			*info;
 	t_list			*l_indir;
 	struct dirent	*s_dir;
 
@@ -64,22 +72,11 @@ t_list			*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned char flags)
 		return (NULL);
 	}
 	while ((s_dir = readdir(*flux_dir)))
-	{
-		if (errno == 13 && !(dir->s_st.st_mode & S_IWUSR) && (flags & FLAG_L))
+		if (set_indir(flags, s_dir, dir, &l_indir) == 0)
 		{
-			if (l_indir)
-				lindir_free(l_indir);
 			if (closedir(*flux_dir) == -1)
 				perror("closedir");
 			return (NULL);
 		}
-		if (!(info = ft_info(s_dir, concat(dir->name, s_dir->d_name))))
-			return (NULL);
-		if (l_indir)
-			ft_lstadd(&l_indir, ft_lstnew((t_info *)info, sizeof(*info)));
-		else
-			l_indir = ft_lstnew((t_info *)info, sizeof(*info));
-		free((void *)info);
-	}
 	return (l_indir);
 }

@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/17 19:17:17 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/18 18:57:51 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct		s_ldir
 void				select_color(char *rights);
 char				*todisp(char *info, char *str, int size);
 char				*todisp2(char *info, char *str, int size);
+char				**scut2(char *name);
 char				*concat(char *ndir, char *nfile);
 void				rec_free(t_ldir *rec);
 void				tab_free(char **tab);
