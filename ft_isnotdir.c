@@ -6,10 +6,12 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/18 19:07:16 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 22:44:50 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <errno.h>
 #include "ft_ls.h"
 
 static t_info	*create_info(char *path)
@@ -17,9 +19,8 @@ static t_info	*create_info(char *path)
 	t_info		*info;
 	struct stat	struct_stat;
 
-	if (lstat(path, &struct_stat) == -1)
-		return (NULL);
-	if (!(info = (t_info *)malloc(sizeof(t_info))))
+	if ((lstat(path, &struct_stat) == -1)
+		|| (!(info = (t_info *)malloc(sizeof(t_info)))))
 		return (NULL);
 	ft_strcpy(info->name, path);
 	info->path = NULL;
@@ -27,9 +28,12 @@ static t_info	*create_info(char *path)
 	ft_mode(struct_stat, info->rights);
 	if (info->rights[0] == 'l')
 	{
-		info->buf = ft_strnew(1024);
-		if (readlink(path, info->buf, 1024) == -1)
-			perror("readlink");
+		if (!(info->buf = ft_strnew(1024)))
+		{
+			free((void *)info);
+			return (NULL);
+		}
+		readlink(path, info->buf, 1024);
 	}
 	else
 		info->buf = NULL;
@@ -47,14 +51,19 @@ static char		**scut(char *name, int nlen, int i)
 		nlen--;
 	if ((nlen == 0) || !(tab = (char **)malloc(sizeof(char *) * 3)))
 		return (NULL);
-	if (!(tab[0] = ft_strnew(nlen)) ||
-		!(tab[1] = ft_strnew(ft_strlen(name) - nlen)))
-		return (NULL);
-	while (nlen-- && (tab[0][i] = *name))
+	if (!(tab[0] = ft_strnew(nlen)))
 	{
-		i++;
-		name++;
+		free((void *)tab);
+		return (NULL);
 	}
+	if (!(tab[1] = ft_strnew(ft_strlen(name) - nlen)))
+	{
+		free((void *)tab[0]);
+		free((void *)tab);
+		return (NULL);
+	}
+	while (nlen-- && (tab[0][i++] = *name))
+		name++;
 	name++;
 	ft_strcpy(tab[1], name);
 	tab[2] = 0;

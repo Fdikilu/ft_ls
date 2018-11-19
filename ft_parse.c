@@ -6,10 +6,11 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 21:27:49 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:54:11 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_ls.h"
 
 static int	norme(char *av, unsigned char *fl, t_ldir **l_d)

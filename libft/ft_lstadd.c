@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 02:06:01 by fdikilu           #+#    #+#             */
-/*   Updated: 2016/12/01 16:04:56 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:16:41 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {
-	if (new == NULL)
+	if (!new)
 		return ;
 	else
 	{

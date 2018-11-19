@@ -6,10 +6,11 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 05:01:22 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/03/28 05:01:26 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:51:59 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_ls.h"
 
 struct group	*ft_grp(struct stat stat_grp)

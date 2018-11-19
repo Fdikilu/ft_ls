@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:27:33 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/17 22:52:42 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:24:25 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,6 @@ void	select_color(char *rights)
 	else if (rights[0] == '-')
 		if (rights[3] == 'x' || rights[6] == 'x' || rights[9] == 'x')
 			ft_putstr(C_RED);
-}
-
-char	*todisp(char *info, char *str, int size)
-{
-	int		leninfo;
-
-	leninfo = ft_strlen(info);
-	str[size] = '\0';
-	while (size-- && leninfo--)
-		str[size] = info[leninfo];
-	free((void *)info);
-	if (size < 0)
-		return (str);
-	else if (size == 0)
-		str[0] = ' ';
-	size++;
-	while (size--)
-		str[size] = ' ';
-	return (str);
-}
-
-char	*todisp2(char *info, char *str, int size)
-{
-	int		i;
-
-	i = 0;
-	while (info[i])
-	{
-		str[i] = info[i];
-		i++;
-	}
-	while (i < size)
-	{
-		str[i] = ' ';
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
 }
 
 void	ft_display(t_info *info, unsigned char flags, int size[5])

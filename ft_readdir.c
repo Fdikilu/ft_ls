@@ -6,10 +6,12 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/18 20:09:41 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:53:59 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <errno.h>
 #include "ft_ls.h"
 
 static t_info	*ft_info(struct dirent *struct_dir, char *path)
@@ -24,9 +26,12 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 		ft_mode(info->s_st, info->rights);
 		if (info->rights[0] == 'l')
 		{
-			info->buf = ft_strnew(1024);
-			if (readlink(path, info->buf, 1024) == -1)
-				perror("readlink");
+			if (!(info->buf = ft_strnew(1024)))
+			{
+				free((void *)info);
+				return (NULL);
+			}
+			readlink(path, info->buf, 1024);
 		}
 		else
 			info->buf = NULL;

@@ -6,10 +6,11 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 22:22:34 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 22:22:40 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:50:08 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
 #include "ft_ls.h"
 
 static int	nb_digit(int n)

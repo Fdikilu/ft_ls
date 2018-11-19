@@ -6,10 +6,11 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 15:07:28 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:54:23 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_ls.h"
 
 static void	ft_rec(char *d, t_info *info, unsigned char fl, t_ldir **rec)

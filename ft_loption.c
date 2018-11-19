@@ -6,10 +6,11 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 22:31:17 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/10 23:28:39 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:50:29 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
 #include "ft_ls.h"
 
 static void	norme(t_info *info, char *nlink, char *pwd, int size[5])

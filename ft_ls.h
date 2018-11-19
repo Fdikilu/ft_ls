@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:55:47 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/18 18:57:51 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 21:56:42 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,9 @@
 # define FLAG_TIR 64
 # define FLAG_ERR 128
 
-# include <sys/types.h>
 # include <sys/stat.h>
-# include <errno.h>
 # include <grp.h>
 # include <pwd.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <time.h>
 # include <dirent.h>
 # include "libft/libft.h"
 
