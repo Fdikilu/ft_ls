@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/13 22:36:23 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/19 15:07:28 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void		ft_ls(t_ldir *l_dir, unsigned char fl, int frst)
 	l_rec = NULL;
 	if (frst)
 	{
+		ft_putchar('\n');
 		ft_putstr(l_dir->name);
 		ft_putstr(":\n");
 	}
 	ft_indir(l_dir, fl, &l_rec);
-	ft_putchar('\n');
 	tmp = l_rec;
 	if (fl & FLAG_UPR)
 		while (l_rec)
