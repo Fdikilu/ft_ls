@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:54:11 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 23:06:18 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	norme(char *av, unsigned char *fl, t_ldir **l_d)
 		init_flags(av, fl);
 	else if ((lstat(av, &s_st) != -1) && S_ISDIR(s_st.st_mode))
 	{
+		return (0);
 		if (!(*l_d = listdir(av, l_d, s_st)))
 			return (1);
 	}

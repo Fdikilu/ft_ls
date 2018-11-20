@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 16:57:42 by fdikilu           #+#    #+#              #
-#    Updated: 2018/11/18 20:06:38 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/11/20 20:58:52 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB_DIR = libft
 
 LIB = $(LIB_DIR)/libft.a
 
-GFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC =\
 	ft_content_swap.c \
@@ -49,20 +49,17 @@ OBJ = $(SRC:.c=.o)
 all: $(LIB) $(NAME)
 
 $(LIB):
-	@(cd $(LIB_DIR) && $(MAKE))
+	@$(MAKE) -C $(LIB_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(GFLAGS) -o $@ $^ $(LIB)
-
-%.o: %.c
-	@$(CC) $(GFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ $^ $(LIB)
 
 clean:
-	@(cd $(LIB_DIR) && $(MAKE) $@)
-	@rm -f $(OBJ)
+	@$(MAKE) clean -C $(LIB_DIR)
+	@$(RM) $(OBJ)
 
 fclean: clean
-	@(cd $(LIB_DIR) && $(MAKE) $@)
-	@rm -f $(NAME)
+	@$(MAKE) fclean -C $(LIB_DIR)
+	@$(RM) $(NAME)
 
 re: fclean all

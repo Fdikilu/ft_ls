@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 04:48:56 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:52:47 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 22:19:24 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,26 @@
 
 char	*ft_time(struct stat st_t)
 {
-	char	*time;
+	char	year[5];
+	char	*tim;
 
-	if (!(time = ft_strchr(ctime(&st_t.st_mtime), ' ')))
+	tim = ft_strchr(ctime(&st_t.st_mtime), ' ');
+	ft_strcpy(year, ft_strrchr(tim, ' '));
+	year[0] = year[1];
+	year[1] = year[2];
+	year[2] = year[3];
+	year[3] = year[4];
+	year[4] = '\0';
+	if (!(tim = ft_strsub(tim, 1, 12)))
 		return (NULL);
-	return (ft_strsub(time, 1, 12));
+	if (((time(NULL) - st_t.st_mtime) > 15778800)
+		|| ((time(NULL) - st_t.st_mtime) < 0))
+	{
+		tim[11] = year[3];
+		tim[10] = year[2];
+		tim[9] = year[1];
+		tim[8] = year[0];
+		tim[7] = ' ';
+	}
+	return (tim);
 }

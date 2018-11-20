@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 01:03:23 by fdikilu           #+#    #+#              #
-#    Updated: 2018/10/30 19:24:08 by fdikilu          ###   ########.fr        #
+#    Updated: 2018/11/20 20:48:54 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 
 NAME = libft.a
 
-GFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror
 
 SRC =	ft_atoi.c \
 		ft_bzero.c \
@@ -87,13 +87,10 @@ $(NAME): $(OBJ)
 	@ar rc $@ $? $(OBJ)
 	@ranlib $@
 
-%.o : %.c
-	@$(CC) $(GFLAG) -o $@ -c $<
-
 clean:
 	@rm -f $(OBJ)
 
 fclean: clean
-	@rm $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
