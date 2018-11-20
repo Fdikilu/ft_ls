@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 20:16:37 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/20 21:13:26 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 23:17:49 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static int		filedir(DIR **fdir, char **tab, t_list **lfile, char *name)
 	return (1);
 }
 
-static int		spe_slink(char *name, t_list **lfile, char **tab)
+static int		d_option(char *name, t_list **lfile, char **tab)
 {
 	t_info	*info;
 
@@ -134,7 +134,7 @@ int				ft_isnotdir(char *name, t_list **lfile)
 		tab_free(tab);
 		return (0);
 	}
-	if ((errno == 0) && spe_slink(name, lfile, tab))
+	if ((errno == 0) && d_option(name, lfile, tab))
 		return (0);
 	tab_free(tab);
 	ft_putstr("ft_ls: ");
