@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 22:31:17 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:50:29 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/21 00:10:32 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	norme(t_info *info, char *nlink, char *pwd, int size[5])
 	ft_putstr("  ");
 }
 
-static void	norme2(t_info *info, unsigned char flags)
+static void	norme2(t_info *info, unsigned int flags)
 {
 	ft_putchar(' ');
 	ft_putstr(info->time);
@@ -40,7 +40,7 @@ static void	norme2(t_info *info, unsigned char flags)
 	ft_putchar('\n');
 }
 
-void		ft_loption(t_info *info, unsigned char flags, int size[5])
+void		ft_loption(t_info *info, unsigned int flags, int size[5])
 {
 	char	nlink[size[0] + 1];
 	char	pwd[size[1] + 1];

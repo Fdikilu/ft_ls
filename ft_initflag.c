@@ -6,13 +6,13 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 17:39:45 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/07 23:14:48 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 23:48:17 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		flags_on(unsigned char *tmp, int c)
+static void		flags_on(unsigned int *tmp, int c)
 {
 	if (c == 'l')
 		*tmp |= FLAG_L;
@@ -26,22 +26,23 @@ static void		flags_on(unsigned char *tmp, int c)
 		*tmp |= FLAG_T;
 	else if (c == 'G')
 		*tmp |= FLAG_UPG;
+	else if (c == 'd')
+		*tmp |= FLAG_D;
+	else if (c == 'g')
+		*tmp |= FLAG_G;
 	else if (c == '-' && (*tmp == NO_FLAG))
 	{
 		*tmp |= FLAG_TIR;
 		return ;
 	}
 	else
-	{
 		*tmp |= FLAG_ERR;
-		*tmp &= FLAG_ERR;
-		return ;
-	}
+	return ;
 }
 
-void			init_flags(char *s, unsigned char *flags)
+void			init_flags(char *s, unsigned int *flags)
 {
-	unsigned char	tmp;
+	unsigned int	tmp;
 
 	++s;
 	if (*s == '\0')

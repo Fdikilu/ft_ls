@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 14:32:18 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:24:53 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/21 00:21:11 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	*todisp2(char *info, char *str, int size)
 {
 	int		i;
 
+	if (!info || !size)
+		return (NULL);
 	i = 0;
 	while (info[i])
 	{

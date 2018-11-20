@@ -6,14 +6,14 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:04:09 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:54:23 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/21 00:15:59 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_ls.h"
 
-static void	ft_rec(char *d, t_info *info, unsigned char fl, t_ldir **rec)
+static void	ft_rec(char *d, t_info *info, unsigned int fl, t_ldir **rec)
 {
 	char	*ndir;
 
@@ -37,7 +37,7 @@ static void	ft_rec(char *d, t_info *info, unsigned char fl, t_ldir **rec)
 	}
 }
 
-static void	ft_indir(t_ldir *d, unsigned char fl, t_ldir **rec)
+static void	ft_indir(t_ldir *d, unsigned int fl, t_ldir **rec)
 {
 	DIR			*flux_dir;
 	int			size[5];
@@ -48,7 +48,7 @@ static void	ft_indir(t_ldir *d, unsigned char fl, t_ldir **rec)
 	if (!(l_indir = ft_readdir(d, &flux_dir, fl)))
 		return ;
 	ft_sort(l_indir, fl);
-	(fl & FLAG_L) ? l_sizecolonne(l_indir, size) : 0;
+	(fl & FLAG_L) ? l_sizecolonne(l_indir, size, fl) : 0;
 	(fl & FLAG_L) ? ft_blocks(l_indir, fl) : 0;
 	tmp = l_indir;
 	while (tmp)
@@ -62,7 +62,7 @@ static void	ft_indir(t_ldir *d, unsigned char fl, t_ldir **rec)
 		perror("ft_ls");
 }
 
-void		ft_ls(t_ldir *l_dir, unsigned char fl, int frst)
+void		ft_ls(t_ldir *l_dir, unsigned int fl, int frst)
 {
 	t_ldir	*l_rec;
 	t_ldir	*tmp;
@@ -92,7 +92,7 @@ int			main(int ac, char **av)
 	int				frst;
 	t_ldir			*tmp;
 	t_ldir			*l_dir;
-	unsigned char	flags;
+	unsigned int	flags;
 
 	(void)ac;
 	frst = 0;
@@ -100,7 +100,7 @@ int			main(int ac, char **av)
 	if (!(l_dir = ft_parse(av, &flags)))
 	{
 		if (flags & FLAG_ERR)
-			ft_putstr("ft_ls: illegal option\nusage: [-GRalrt] [file ...]\n");
+			ft_putstr("ft_ls: illegal option\nusage: [-GRadglrt] [file ...]\n");
 		return (0);
 	}
 	while (l_dir)

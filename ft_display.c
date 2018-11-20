@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:27:33 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:24:25 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 23:22:29 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	select_color(char *rights)
 			ft_putstr(C_RED);
 }
 
-void	ft_display(t_info *info, unsigned char flags, int size[5])
+void	ft_display(t_info *info, unsigned int flags, int size[5])
 {
 	if (info->name[0] == '.' && !(flags & FLAG_A))
 	{

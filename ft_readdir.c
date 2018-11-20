@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 15:26:54 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:53:59 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 23:22:49 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_info	*ft_info(struct dirent *struct_dir, char *path)
 	return (info);
 }
 
-static int		set_indir(unsigned char flags, struct dirent *s_dir,
+static int		set_indir(unsigned int flags, struct dirent *s_dir,
 	t_ldir *dir, t_list **l_indir)
 {
 	t_info			*info;
@@ -64,7 +64,7 @@ static int		set_indir(unsigned char flags, struct dirent *s_dir,
 	return (1);
 }
 
-t_list			*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned char flags)
+t_list			*ft_readdir(t_ldir *dir, DIR **flux_dir, unsigned int flags)
 {
 	t_list			*l_indir;
 	struct dirent	*s_dir;

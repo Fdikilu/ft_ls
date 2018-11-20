@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 22:22:34 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/19 21:50:08 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/21 00:14:45 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	value_size(t_info *info, int size[5])
 	}
 }
 
-void		l_sizecolonne(t_list *l_indir, int size[5])
+void		l_sizecolonne(t_list *l_indir, int size[5], unsigned int fl)
 {
 	int		i;
 
@@ -63,4 +63,5 @@ void		l_sizecolonne(t_list *l_indir, int size[5])
 		value_size(l_indir->content, size);
 		l_indir = l_indir->next;
 	}
+	(fl & FLAG_G) ? (size[1] = 0) : 0;
 }

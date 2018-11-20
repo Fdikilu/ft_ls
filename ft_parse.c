@@ -6,14 +6,14 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 00:30:26 by fdikilu           #+#    #+#             */
-/*   Updated: 2018/11/20 23:06:18 by fdikilu          ###   ########.fr       */
+/*   Updated: 2018/11/20 23:34:16 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_ls.h"
 
-static int	norme(char *av, unsigned char *fl, t_ldir **l_d)
+static int	norme(char *av, unsigned int *fl, t_ldir **l_d)
 {
 	struct stat	s_st;
 
@@ -23,7 +23,8 @@ static int	norme(char *av, unsigned char *fl, t_ldir **l_d)
 		init_flags(av, fl);
 	else if ((lstat(av, &s_st) != -1) && S_ISDIR(s_st.st_mode))
 	{
-		return (0);
+		if (*fl & FLAG_D)
+			return (0);
 		if (!(*l_d = listdir(av, l_d, s_st)))
 			return (1);
 	}
@@ -32,7 +33,7 @@ static int	norme(char *av, unsigned char *fl, t_ldir **l_d)
 	return (1);
 }
 
-t_ldir		*ft_parse(char **av, unsigned char *flags)
+t_ldir		*ft_parse(char **av, unsigned int *flags)
 {
 	t_list		*l_file;
 	t_ldir		*l_dir;
